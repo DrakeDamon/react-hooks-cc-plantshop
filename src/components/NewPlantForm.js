@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 
 function NewPlantForm({ onFormSubmit }) {
-  // Local state to manage form inputs
   const [name, setName] = useState("");
   const [image, setImage] = useState("");
   const [price, setPrice] = useState("");
 
-  // Handle form submission
   const handleSubmit = (e) => {
-    e.preventDefault(); // Prevent the default form submission behavior
+    e.preventDefault(); 
 
-    // Create a new plant object using state values
+
     const newPlant = { 
-      id: Date.now(),   // Generate a unique ID for the new plant
-      name: name.trim(),  // Use the state variable for the name
-      image: image.trim(),  // Use the state variable for the image URL
-      price: parseFloat(price).toFixed(2)  // Convert the price to a number with two decimal places
+      name: name.trim(),  
+      image: image.trim(),  
+      price: parseFloat(price)  
     };
 
-    console.log("New Plant Data:", newPlant); // Debugging: log the new plant object
 
-    // Call the function passed down from App with the new plant data
-    onFormSubmit(newPlant);
+    fetch('http://localhost:6001/plants', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify(newPlant) 
+    })
+    .then((res) => res.json()) 
+    .then((data) => {
+      console.log("New Plant Added to Server:", data); 
+      onFormSubmit(data); 
+    })
+    .catch((error) => console.error('Error adding new plant:', error)); 
 
-    // Clear the form fields after submission
     setName("");
     setImage("");
     setPrice("");

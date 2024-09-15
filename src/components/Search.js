@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 
-function Search({handleFilter}) {
+function Search({onSearch}) {
 
-  const[searchQuery, setSearchQuery]=useState('')
-  
+  const [searchTerm, setSearchTerm] = useState("");
+
+
   const handleSearchChange = (e) => {
-    const query = e.target.value
-    setSearchQuery(query)
-    handleFilter(query)
-  }
+    setSearchTerm(e.target.value); 
+    onSearch(e.target.value);
+  };
+
   return (
     <div className="searchbar">
       <label htmlFor="search">Search Plants:</label>
       <input
         type="text"
         id="search"
-        value={searchQuery}
+        value={searchTerm}
         placeholder="Type a name to search..."
         onChange={handleSearchChange}
       />
