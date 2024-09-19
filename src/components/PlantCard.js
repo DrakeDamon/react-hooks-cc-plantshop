@@ -30,7 +30,7 @@ const handleDelete = () => {
       <input
         type="number"
         value={newPrice}
-        onChange={handlePriceChange} // Update new price input state on change
+        onChange={handlePriceChange} 
         step="0.01"
       />
       <button onClick={handleUpdatePrice}>Update Price</button> 
