@@ -6,7 +6,6 @@ function Search({onSearch}) {
 
 
   const handleSearchChange = (e) => {
-    setSearchTerm(e.target.value); 
     onSearch(e.target.value);
   };
 
@@ -16,7 +15,6 @@ function Search({onSearch}) {
       <input
         type="text"
         id="search"
-        value={searchTerm}
         placeholder="Type a name to search..."
         onChange={handleSearchChange}
       />
